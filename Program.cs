@@ -4,6 +4,22 @@ namespace EmployeeWageProblem
 {
     class Program
     {
+        public static float EmployeeDailyWage()
+        {
+            int wagePerHour = 20;
+            int fullDayHour = 8;
+            Random random = new Random();
+            // A random object variable used to assign the time contribution of an employee
+            int fullTime = random.Next(0, 2);
+            if (fullTime == 1)
+            {
+                return wagePerHour * fullDayHour;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public static void Display()
         {
             Console.WriteLine("=============================================");
@@ -28,8 +44,12 @@ namespace EmployeeWageProblem
         }
         static void Main(string[] args)
         {
+            // Calling the static Function Display
             Display();
+            // Calling the static Function Employee Attendance
             EmployeeAttendance();
+            // Calling the static function to Compute the daily wage for a full time employee
+            Console.WriteLine(EmployeeDailyWage());
         }
     }
 }
