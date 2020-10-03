@@ -4,31 +4,46 @@ using System.Text;
 
 namespace EmployeeWageProblem
 {
-    class EmployeeWageBuilder : IComputeWage
+    class EmpWageBuilder : IComputeWage, IComputeWageForQuery
     {
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
 
-        private LinkedList<CompanyEmployeeWage> companyEmpWagesList;
+        /// <summary>
+        /// The company emp wages list anf the dictionary mapped with key as company name
+        /// </summary>
+        private LinkedList<CompanyEmpWage> companyEmpWagesList;
+        private Dictionary<string, CompanyEmpWage> companyToEmpWageMap;
 
-
-
-        public EmployeeWageBuilder()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmpWageBuilder"/> class.
+        /// </summary>
+        public EmpWageBuilder()
         {
-            this.companyEmpWagesList = new LinkedList<CompanyEmployeeWage>();
-
+            this.companyEmpWagesList = new LinkedList<CompanyEmpWage>();
+            this.companyToEmpWageMap = new Dictionary<string, CompanyEmpWage>();
         }
 
+        /// <summary>
+        /// Adds the company emp wage.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <param name="empRatePerHour">The emp rate per hour.</param>
+        /// <param name="numOfWorkingDays">The number of working days.</param>
+        /// <param name="maxHoursPerMonth">The maximum hours per month.</param>
         public void AddCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
-            CompanyEmployeeWage companyEmpWage = new CompanyEmployeeWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+            CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
             this.companyEmpWagesList.AddLast(companyEmpWage);
-
+            this.companyToEmpWageMap.Add(company, companyEmpWage);
         }
 
+        /// <summary>
+        /// Computes the emp wage.
+        /// </summary>
         public void ComputeEmpWage()
         {
-            foreach (CompanyEmployeeWage companyEmpWage in this.companyEmpWagesList)
+            foreach (CompanyEmpWage companyEmpWage in this.companyEmpWagesList)
             {
                 int totalEmpWageTemp = this.ComputeEmpWage(companyEmpWage);
                 companyEmpWage.SettotalEmpWage(totalEmpWageTemp);
@@ -36,7 +51,12 @@ namespace EmployeeWageProblem
             }
         }
 
-        public int ComputeEmpWage(CompanyEmployeeWage companyEmpWage)
+        /// <summary>
+        /// Computes the emp wage.
+        /// </summary>
+        /// <param name="companyEmpWage">The company emp wage.</param>
+        /// <returns></returns>
+        public int ComputeEmpWage(CompanyEmpWage companyEmpWage)
         {
             int totalEmpHours = 0;
             int workingDays = 0;
@@ -45,7 +65,7 @@ namespace EmployeeWageProblem
             int totalWagePerMonth = 0;
             while (totalEmpHours < companyEmpWage.maxHoursPerMonth && workingDays < companyEmpWage.numOfWorkingDays)
             {
-                EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
+                EmpWageBuilder empWageBuilder = new EmpWageBuilder();
                 empHours = empWageBuilder.GetWorkingHours();
 
                 if (totalEmpHours == 96)
@@ -65,6 +85,10 @@ namespace EmployeeWageProblem
 
         }
 
+        /// <summary>
+        /// Gets the working hours.
+        /// </summary>
+        /// <returns></returns>
         public int GetWorkingHours()
         {
             const int FULL_TIME = 1;
@@ -86,40 +110,15 @@ namespace EmployeeWageProblem
                     break;
             }
             return empHours;
-
         }
-
-        public void ComputeDailyWage()
+        /// <summary>
+        /// Gets the total wage.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <returns></returns>
+        public int GetTotalWage(string company)
         {
-            foreach (CompanyEmployeeWage companyEmpWage in this.companyEmpWagesList)
-            {
-                int dailyEmpWageTemp = this.ComputeDailyWage(companyEmpWage);
-                companyEmpWage.SetDailyEmpWage(dailyEmpWageTemp);
-                Console.WriteLine("\n"+companyEmpWage.toDailyString());
-            }
+            return this.companyToEmpWageMap[company].totalEmpWage;
         }
-
-        public int ComputeDailyWage(CompanyEmployeeWage companyEmpWage)
-        {
-            int totalEmpHours = 0;
-            int workingDays = 0;
-            int empHours = 0;
-            int totalWagePerDay = 0;
-
-                EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
-                empHours = empWageBuilder.GetWorkingHours();
-
-            if (empHours != 0)
-            {
-                workingDays++;
-                totalWagePerDay = empHours * companyEmpWage.ratePerHours;
-                //Console.WriteLine("Total Wage per Day.." + totalWagePerDay);
-            }
-          
-            return totalWagePerDay;
-
-        }
-
-
     }
 }
