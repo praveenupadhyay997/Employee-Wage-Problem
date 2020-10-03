@@ -11,6 +11,7 @@ namespace EmployeeWageProblem
         public int numOfWorkingDays;
         public int maxHoursPerMonth;
         public int totalEmpWage;
+        public int dailyEmpWage;
 
         public CompanyEmployeeWage(string company, int ratePerHours, int numOfWorkingDays, int maxHoursPerMonth)
         {
@@ -26,9 +27,19 @@ namespace EmployeeWageProblem
             this.totalEmpWage = totalEmpWage;
         }
 
+        public void SetDailyEmpWage(int dailyEmpWage)
+        {
+            this.dailyEmpWage = dailyEmpWage;
+        }
+
         public string toString()
         {
             return "Total Emp Wage for company: " + company + " is " + totalEmpWage;
+        }
+        
+        public string toDailyString()
+        {
+            return "Daily Emp Wage for company : " + company + " is " + dailyEmpWage;
         }
     }
 }
