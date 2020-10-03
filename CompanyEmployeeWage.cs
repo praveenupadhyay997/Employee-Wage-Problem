@@ -4,30 +4,31 @@ using System.Text;
 
 namespace EmployeeWageProblem
 {
-    class CompanyEmpWage
+    class CompanyEmployeeWage
     {
         public string company;
-        public int empRatePerHour;
+        public int ratePerHours;
         public int numOfWorkingDays;
         public int maxHoursPerMonth;
         public int totalEmpWage;
 
-        public CompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+        public CompanyEmployeeWage(string company, int ratePerHours, int numOfWorkingDays, int maxHoursPerMonth)
         {
             this.company = company;
-            this.empRatePerHour = empRatePerHour;
+            this.ratePerHours = ratePerHours;
             this.numOfWorkingDays = numOfWorkingDays;
             this.maxHoursPerMonth = maxHoursPerMonth;
+            totalEmpWage = 0;
         }
 
-        public void setTotalEmpWage(int totalEmpWage)
+        public void SettotalEmpWage(int totalEmpWage)
         {
             this.totalEmpWage = totalEmpWage;
         }
 
         public string toString()
         {
-            return "Total Emp Wage for company : " + this.company + " is: " + this.totalEmpWage;
+            return "Total Emp Wage for company: " + company + " is " + totalEmpWage;
         }
     }
 }
