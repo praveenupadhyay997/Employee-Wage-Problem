@@ -10,13 +10,10 @@ namespace EmployeeWageProblem
             Console.WriteLine("Welcome to Employee Wage Computation Program");
             Console.WriteLine("=============================================");
             // Declaring Objects for companies
-            EmployeeCompanyWageData ZSAssociate = new EmployeeCompanyWageData("ZSAssociate", 20, 20, 50);
-            EmployeeCompanyWageData IHSMarkit = new EmployeeCompanyWageData("IHS Markit", 10, 40, 400);
-            // Calling the Objects
-            ZSAssociate.calculateWage();
-            Console.WriteLine(ZSAssociate.toString());
-            IHSMarkit.calculateWage();
-            Console.WriteLine(IHSMarkit.toString());
+            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+            empWageBuilder.addCompanyEmpWage("ZS Associate", 20, 20, 100);
+            empWageBuilder.addCompanyEmpWage("BridgeLabz", 40, 40, 70);
+            empWageBuilder.computeEmpWage();
         }
     }
 }
