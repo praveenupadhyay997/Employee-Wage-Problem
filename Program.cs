@@ -10,10 +10,18 @@ namespace EmployeeWageProblem
             Console.WriteLine("Welcome to Employee Wage Computation Program");
             Console.WriteLine("=============================================");
             // Declaring Objects for companies
-            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-            empWageBuilder.addCompanyEmpWage("ZS Associate", 20, 20, 100);
-            empWageBuilder.addCompanyEmpWage("BridgeLabz", 40, 40, 70);
-            empWageBuilder.computeEmpWage();
+            EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
+            empWageBuilder.AddCompanyEmpWage("Dmart", 20, 2, 20);
+            empWageBuilder.AddCompanyEmpWage("Reliance", 15, 14, 40);
+            empWageBuilder.ComputeEmpWage();
+            Console.ReadKey();
         }
     }
+
+    public interface IComputeWage
+    {
+        void AddCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
+        void ComputeEmpWage();
+    }
 }
+
