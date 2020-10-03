@@ -4,6 +4,51 @@ namespace EmployeeWageProblem
 {
     class Program
     {
+        public static void CalculateTotalWage()
+        {
+            //Constants for time to be used in switch cases and anywhere required
+            const int FULL_TIME = 1;
+            const int PART_TIME = 2;
+            //Constant for per hour limitation
+            const int PER_HOUR = 20;
+            int workingDayPerMonth = 20;
+            int workingDays = 0;
+            int empHr = 0;
+            int totalWagePerDay = 0;
+            int totalWagePerMonth = 0;
+            int maxHourInMonth = 100;
+            int totalEmpHours = 0;
+
+            // Condition denoting that calculate total employee wage till the condition of max days per month or max hour in a month is reached
+            while (totalEmpHours <= maxHourInMonth && workingDays < workingDayPerMonth)
+            {
+                Random random = new Random();
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
+                {
+                    case FULL_TIME:
+                        empHr = 8;
+                        workingDays++;
+                        break;
+                    case PART_TIME:
+                        empHr = 4;
+                        workingDays++;
+                        break;
+                    default:
+                        empHr = 0;
+                        break;
+                }
+                // Case to match Exact hours
+                if (totalEmpHours == 96)
+                {
+                    empHr = 4;
+                }
+                totalEmpHours += empHr;
+                totalWagePerDay = empHr * PER_HOUR;
+                totalWagePerMonth += totalWagePerDay;
+                Console.WriteLine("Total Monthly wage ={0}", totalWagePerMonth);
+            }
+        }
         public static float MonthlyWage()
         {
             int wagePerHour = 20;
@@ -113,6 +158,8 @@ namespace EmployeeWageProblem
             Console.WriteLine(AllEmployeeDailyWage());
             // Calling the static function to Compute the monthly wage for all employee
             Console.WriteLine(MonthlyWage());
+            // Calling the static function to Compute the total employee wage for all employee
+            CalculateTotalWage();
         }
     }
 }
