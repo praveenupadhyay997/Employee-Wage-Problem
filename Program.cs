@@ -4,6 +4,23 @@ namespace EmployeeWageProblem
 {
     class Program
     {
+        public static float PartTimeEmployeeDailyWage()
+        {
+            int wagePerHour = 20;
+            int fullDayHour = 8;
+            int partDayHour = 4;
+            Random random = new Random();
+            // Above randoom variable is to know part time or full time
+            int partTime = random.Next(0, 2);
+            if (partTime == 0)
+            {
+                return wagePerHour * partDayHour;
+            }
+            else
+            {
+                return wagePerHour * fullDayHour;
+            }
+        }
         public static float EmployeeDailyWage()
         {
             int wagePerHour = 20;
@@ -50,6 +67,8 @@ namespace EmployeeWageProblem
             EmployeeAttendance();
             // Calling the static function to Compute the daily wage for a full time employee
             Console.WriteLine(EmployeeDailyWage());
+            // Calling the static function to Compute the daily wage for a Part time employee
+            Console.WriteLine(PartTimeEmployeeDailyWage());
         }
     }
 }
