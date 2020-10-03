@@ -6,27 +6,33 @@ namespace EmployeeWageProblem
     {
         static void Main(string[] args)
         {
+            //Welcome Message
             Console.WriteLine("=============================================");
             Console.WriteLine("Welcome to Employee Wage Computation Program");
             Console.WriteLine("=============================================");
-            // Declaring Objects for companies
-            EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
-            empWageBuilder.AddCompanyEmpWage("Dmart", 20, 2, 20);
-            empWageBuilder.AddCompanyEmpWage("Reliance", 15, 14, 40);
-            //Calling the method to compute total wage and storing it in the class member
+            // Declaring Objects for different companies
+            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+            //Adding the Company Data
+            empWageBuilder.AddCompanyEmpWage("Dmart", 20, 20, 100);
+            empWageBuilder.AddCompanyEmpWage("Reliance", 15, 14, 130);
+            //Compute the total Wage
             empWageBuilder.ComputeEmpWage();
-            //Calling the method to compute daily wage and storing it in the class member
-            empWageBuilder.ComputeDailyWage();
             Console.ReadKey();
         }
     }
 
-    //Interface Upholding the three operations namely add, compute daily wage and compute total wage
+    //Interface with functionality to add the details in both list and dictionary and store the total employee wage
     public interface IComputeWage
     {
         void AddCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
-        void ComputeDailyWage();
+
         void ComputeEmpWage();
+    }
+
+    //Interface with functionality to search the total employee wage by the company name mapped on Dictionary
+    public interface IComputeWageForQuery
+    {
+        int GetTotalWage(string company);
     }
 }
 
