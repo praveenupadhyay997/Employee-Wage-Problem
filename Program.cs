@@ -4,6 +4,24 @@ namespace EmployeeWageProblem
 {
     class Program
     {
+        public static float MonthlyWage()
+        {
+            int wagePerHour = 20;
+            int fullDayHour = 8;
+            int partDayHour = 4;
+            //Constant for number of months in a day
+            int dayPerMonth = 20;
+            Random random = new Random();
+            int Time = random.Next(0, 2);
+            if (Time == 0)
+            {
+                return wagePerHour * partDayHour * dayPerMonth;
+            }
+            else
+            {
+                return wagePerHour * fullDayHour * dayPerMonth;
+            }
+        }
         public static float AllEmployeeDailyWage()
         {
             int wagePerHour = 20;
@@ -93,6 +111,8 @@ namespace EmployeeWageProblem
             Console.WriteLine(PartTimeEmployeeDailyWage());
             // Calling the static function to Compute the daily wage for all employee using switch case
             Console.WriteLine(AllEmployeeDailyWage());
+            // Calling the static function to Compute the monthly wage for all employee
+            Console.WriteLine(MonthlyWage());
         }
     }
 }
