@@ -88,5 +88,38 @@ namespace EmployeeWageProblem
             return empHours;
 
         }
+
+        public void ComputeDailyWage()
+        {
+            foreach (CompanyEmployeeWage companyEmpWage in this.companyEmpWagesList)
+            {
+                int dailyEmpWageTemp = this.ComputeDailyWage(companyEmpWage);
+                companyEmpWage.SetDailyEmpWage(dailyEmpWageTemp);
+                Console.WriteLine("\n"+companyEmpWage.toDailyString());
+            }
+        }
+
+        public int ComputeDailyWage(CompanyEmployeeWage companyEmpWage)
+        {
+            int totalEmpHours = 0;
+            int workingDays = 0;
+            int empHours = 0;
+            int totalWagePerDay = 0;
+
+                EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
+                empHours = empWageBuilder.GetWorkingHours();
+
+            if (empHours != 0)
+            {
+                workingDays++;
+                totalWagePerDay = empHours * companyEmpWage.ratePerHours;
+                //Console.WriteLine("Total Wage per Day.." + totalWagePerDay);
+            }
+          
+            return totalWagePerDay;
+
+        }
+
+
     }
 }
